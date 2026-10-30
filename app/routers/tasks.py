@@ -1,3 +1,4 @@
+from app.ml import duration
 from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -20,7 +21,12 @@ def get_task_or_404(db: Session, task_id: int) -> Task:
 
 @router.post("", response_model=TaskOut, status_code=201)
 def create_task(payload: TaskCreate, db: Session = Depends(get_db)):
-    task = Task(**payload.model_dump())
+    data = payload.model_dump()
+    if data.get("category"):
+        data["category"] = data["category"].strip().lower()
+    task = Task(**data)
+    if task.estimate_minutes:
+        task.predicted_minutes = duration.predict(task.estimate_minutes, task.category)
     db.add(task)
     db.commit()
     db.refresh(task)

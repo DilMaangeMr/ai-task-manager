@@ -24,5 +24,7 @@ class Task(Base):
     done: Mapped[bool] = mapped_column(default=False)
     estimate_minutes: Mapped[int | None] = mapped_column(nullable=True)
     actual_minutes: Mapped[int | None] = mapped_column(nullable=True)
+    category: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    predicted_minutes: Mapped[int | None] = mapped_column(nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

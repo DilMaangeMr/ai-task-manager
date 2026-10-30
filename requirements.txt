@@ -40,3 +40,5 @@ watchfiles==1.3.0
 websockets==17.2
 anthropic
 pydantic-settings
+numpy
+scikit-learn

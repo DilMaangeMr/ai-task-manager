@@ -10,6 +10,7 @@ class TaskCreate(BaseModel):
     due: date | None = None
     deadline_type: DeadlineType = DeadlineType.soft
     estimate_minutes: int | None = Field(default=None, gt=0)
+    category: str | None = Field(default=None, max_length=50)
 
 
 class TaskUpdate(BaseModel):
@@ -17,6 +18,7 @@ class TaskUpdate(BaseModel):
     due: date | None = None
     deadline_type: DeadlineType | None = None
     estimate_minutes: int | None = Field(default=None, gt=0)
+    category: str | None = Field(default=None, max_length=50)
 
 
 class TaskComplete(BaseModel):
@@ -33,5 +35,7 @@ class TaskOut(BaseModel):
     done: bool
     estimate_minutes: int | None
     actual_minutes: int | None
+    category: str | None
+    predicted_minutes: int | None
     created_at: datetime
     completed_at: datetime | None

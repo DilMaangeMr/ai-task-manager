@@ -32,6 +32,7 @@ def overwhelmed(hours_available: float | None = None, db: Session = Depends(get_
             "due": t.due,
             "deadline_type": t.deadline_type.value,
             "estimate_minutes": t.estimate_minutes,
+            "predicted_minutes": t.predicted_minutes,
         }
         for t in open_tasks
     ]
